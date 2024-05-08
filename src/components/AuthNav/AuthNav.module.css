@@ -1,0 +1,42 @@
+.wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    font-size: 24px;
+}
+
+
+.navLink {
+    background-color: transparent;
+    border: 1px solid #433a46ab;
+    color: #00132C;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 16px 23px;
+    position: relative;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+.navLink:hover,
+.navLink:active {
+    outline: 0;
+}
+
+.navLink:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.navLink:before {
+    /* background-color: #d4bee2; */
+    content: "";
+    height: calc(100% + 3px);
+    position: absolute;
+    right: -7px;
+    top: -9px;
+    transition: background-color 300ms ease-in;
+    width: 100%;
+    z-index: -1;
+    border-radius: 20px;
+}
