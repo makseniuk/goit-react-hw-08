@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact, logOutAsync } from "./operations"; // Додано logOutAsync
+import { fetchContacts, addContact, deleteContact, logOutAsync } from "./operations";
 import toast from "react-hot-toast";
 
 export const INITIAL_STATE = {
@@ -13,15 +13,15 @@ export const INITIAL_STATE = {
   },
 };
 
-const handleRejected = () => ({ 
-  loading: false, 
-  error: true,
-});
+const handlePending = (state) => {
+  state.loading = true;
+  state.error = null; 
+};
 
-const handlePending = () => ({ 
-  loading: true, 
-  error: false,
-});
+const handleRejected = (state) => {
+  state.loading = false;
+  state.error = true; 
+};
 
 const slice = createSlice({
   name: 'contacts',
