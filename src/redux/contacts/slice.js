@@ -4,14 +4,9 @@ import { logout } from "../auth/operations"; // Correctly import the logout oper
 import toast from "react-hot-toast";
 
 export const INITIAL_STATE = {
-  contacts: {
     items: [],
     loading: false,
     error: null,
-  },
-  filters: {
-    name: "",
-  },
 };
 
 const handlePending = (state) => {
