@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact, logOutAsync } from "./operations";
+import { fetchContacts, addContact, deleteContact } from "./operations";
+import { logout } from "../auth/operations"; // Correctly import the logout operation
 import toast from "react-hot-toast";
 
 export const INITIAL_STATE = {
@@ -9,30 +10,30 @@ export const INITIAL_STATE = {
     error: null,
   },
   filters: {
-    name: ""
+    name: "",
   },
 };
 
 const handlePending = (state) => {
   state.loading = true;
-  state.error = null; 
+  state.error = null;
 };
 
 const handleRejected = (state) => {
   state.loading = false;
-  state.error = true; 
+  state.error = true;
 };
 
 const slice = createSlice({
-  name: 'contacts',
+  name: "contacts",
   initialState: INITIAL_STATE.contacts,
 
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, handlePending)
       .addCase(addContact.pending, handlePending)
       .addCase(deleteContact.pending, handlePending)
-      .addCase(logOutAsync.pending, handlePending) 
+      .addCase(logout.pending, handlePending) // Use logout instead of logOutAsync
 
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.loading = false;
@@ -41,12 +42,12 @@ const slice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
-        toast('You add a new contact!', {
+        toast("You add a new contact!", {
           style: {
-            borderRadius: '10px',
-            background: 'rgb(144, 26, 228)',
-            color: '#fff',
-          }
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
         });
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
@@ -54,18 +55,18 @@ const slice = createSlice({
         state.items = state.items.filter((item) => item.id !== action.payload.id);
         toast(`You deleted ${action.payload.name}!`, {
           style: {
-            borderRadius: '10px',
-            background: 'rgb(144, 26, 228)',
-            color: '#fff',
-          }
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
         });
       })
-      .addCase(logOutAsync.fulfilled, () => INITIAL_STATE.contacts) 
+      .addCase(logout.fulfilled, () => INITIAL_STATE.contacts) // Use logout instead of logOutAsync
 
       .addCase(fetchContacts.rejected, handleRejected)
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.rejected, handleRejected)
-      .addCase(logOutAsync.rejected, handleRejected); 
+      .addCase(logout.rejected, handleRejected); // Use logout instead of logOutAsync
   },
 });
 
