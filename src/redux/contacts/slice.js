@@ -21,7 +21,7 @@ const handleRejected = (state) => {
 
 const slice = createSlice({
   name: "contacts",
-  initialState: INITIAL_STATE.contacts,
+  initialState: INITIAL_STATE,
 
   extraReducers: (builder) => {
     builder

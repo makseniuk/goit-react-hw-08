@@ -1,4 +1,3 @@
-import { INITIAL_STATE } from '../contacts/slice';
 import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
